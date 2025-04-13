@@ -3,47 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Minecraft Server</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>IceMC Login</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>MyServer</h1>
-            <p>Join the adventure today!</p>
-            <div class="server-ip">
-                <p>Server IP: thebgminecraft.xyz</p>
-            </div>
-        </div>
-    </header>
+    <div class="container">
+        <h1>Welcome to IceMC</h1>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <p id="error-message" style="color: red; display: none;">Invalid username or password!</p>
+        </form>
+    </div>
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
 
-    <main class="container">
-        <section class="features">
-            <div class="feature-card">
-                <h2>Survival</h2>
-                <p>Experience pure survival gameplay with friends</p>
-            </div>
-            <div class="feature-card">
-                <h2>Community</h2>
-                <p>Join our friendly community of players</p>
-            </div>
-            <div class="feature-card">
-                <h2>Events</h2>
-                <p>Regular events and competitions with prizes</p>
-            </div>
-        </section>
+            // Get input values
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
 
-        <section class="cta">
-            <h2>Ready to Join?</h2>
-            <p>Connect to our server using the IP above or join our Discord community!</p>
-            <a href="https://discord.gg/ABNscSS5wW" class="button">Join Discord</a>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 MyServer. Not affiliated with Mojang AB.</p>
-    </footer>
-    
-    <script src="js/main.js"></script>
+            // Validate credentials
+            if (username === "Admin" && password === "OfficialtzIceMC1030301") {
+                alert("Login successful!");
+                window.location.href = "dashboard.html"; // Redirect to dashboard
+            } else {
+                // Show error message
+                document.getElementById("error-message").style.display = "block";
+            }
+        });
+    </script>
 </body>
 </html>
