@@ -3,53 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IceMC Login</title>
+    <title>IceMC | Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to IceMC</h1>
-        <div class="datetime">
-            <p id="current-time"></p>
-            <p>User: Admin</p>
+    <div class="container login-container">
+        <div class="login-box">
+            <h1>IceMC Panel</h1>
+            <div class="info-box">
+                <p id="current-time"></p>
+                <p id="current-user">User: RandomTechrate</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn login-btn">Login</button>
+                <p id="error-message">Invalid credentials</p>
+            </form>
         </div>
-        <form id="login-form">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit" class="btn">Login</button>
-            <p id="error-message" style="color: red; display: none;">Invalid username or password!</p>
-        </form>
     </div>
-
-    <script>
-        // Update time
-        function updateTime() {
-            const now = new Date();
-            const formatted = now.getUTCFullYear() + '-' + 
-                            String(now.getUTCMonth() + 1).padStart(2, '0') + '-' +
-                            String(now.getUTCDate()).padStart(2, '0') + ' ' +
-                            String(now.getUTCHours()).padStart(2, '0') + ':' +
-                            String(now.getUTCMinutes()).padStart(2, '0') + ':' +
-                            String(now.getUTCSeconds()).padStart(2, '0');
-            document.getElementById('current-time').textContent = formatted;
-        }
-        
-        updateTime();
-        setInterval(updateTime, 1000);
-
-        // Obfuscated credentials check
-        const _0x5f4d=['\x41\x64\x6d\x69\x6e','\x4f\x66\x66\x69\x63\x69\x61\x6c\x74\x7a\x49\x63\x65\x4d\x43\x31\x30\x33\x30\x33\x30\x31'];
-        document.getElementById("login-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const u = document.getElementById("username").value;
-            const p = document.getElementById("password").value;
-            if(u === _0x5f4d[0] && p === _0x5f4d[1]){
-                sessionStorage.setItem('authenticated', 'true');
-                window.location.href = '/dashboard.html';
-            } else {
-                document.getElementById("error-message").style.display = "block";
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
