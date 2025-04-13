@@ -3,95 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IceMC Dashboard</title>
+    <title>IceMC | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .dashboard-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-        }
-
-        #console {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            min-height: 300px;
-            color: #00ff00;
-            font-family: monospace;
-            text-align: left;
-            margin-top: 20px;
-            display: none;
-        }
-    </style>
 </head>
 <body>
     <div class="container dashboard-container">
-        <div class="nav-buttons">
-            <button class="btn" onclick="showConsole()">Console</button>
-            <button class="btn" onclick="logout()">Logout</button>
+        <div class="dashboard-header">
+            <h1>IceMC Dashboard</h1>
+            <div class="info-box">
+                <p id="current-time"></p>
+                <p id="current-user">User: RandomTechrate</p>
+            </div>
         </div>
         
-        <div id="console">
-            <div id="console-output"></div>
-            <input type="text" id="console-input" placeholder="Enter command..." 
-                   style="width: 100%; background: transparent; color: #00ff00; border: none; outline: none; margin-top: 10px;">
+        <div class="dashboard-content">
+            <div class="nav-buttons">
+                <button class="btn console-btn" onclick="toggleConsole()">Console</button>
+                <button class="btn logout-btn" onclick="logout()">Logout</button>
+            </div>
+            
+            <div id="console" class="console-container">
+                <div id="console-output"></div>
+                <div class="console-input-container">
+                    <span class="console-prompt">></span>
+                    <input type="text" id="console-input" placeholder="Enter command...">
+                </div>
+            </div>
         </div>
     </div>
-
-    <script>
-        // Check authentication
-        if (!sessionStorage.getItem('authenticated')) {
-            window.location.href = '/';
-        }
-
-        function logout() {
-            sessionStorage.removeItem('authenticated');
-            window.location.href = '/';
-        }
-
-        function showConsole() {
-            const console = document.getElementById('console');
-            console.style.display = console.style.display === 'none' ? 'block' : 'none';
-        }
-
-        // Console functionality
-        const consoleInput = document.getElementById('console-input');
-        const consoleOutput = document.getElementById('console-output');
-
-        consoleInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const command = this.value;
-                executeCommand(command);
-                this.value = '';
-            }
-        });
-
-        function executeCommand(command) {
-            // Here you'll implement the connection to your plugin's command endpoint
-            fetch('/command', {
-                method: 'POST',
-                body: command
-            })
-            .then(response => response.text())
-            .then(result => {
-                appendToConsole(`> ${command}\n${result}`);
-            })
-            .catch(error => {
-                appendToConsole(`> ${command}\nError: ${error}`);
-            });
-        }
-
-        function appendToConsole(text) {
-            consoleOutput.innerHTML += text + '<br>';
-            consoleOutput.scrollTop = consoleOutput.scrollHeight;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
